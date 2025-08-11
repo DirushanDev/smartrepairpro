@@ -185,7 +185,7 @@ export default function ServicesWithModal() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="service-title"
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-white shadow-2xl"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-white shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-start justify-between gap-4 border-b px-6 py-5">
