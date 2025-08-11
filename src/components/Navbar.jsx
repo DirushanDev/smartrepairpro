@@ -47,7 +47,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <a
             href="#quote"
-            className="rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+            className="hidden md:inline-block rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90"
           >
             Get Quote
           </a>
