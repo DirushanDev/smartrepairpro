@@ -18,6 +18,7 @@ function App() {
     <>
       <Navbar />
       <Header />
+       <Heritage />
        <Journey />
       <Story />
       {/* <Journey />
