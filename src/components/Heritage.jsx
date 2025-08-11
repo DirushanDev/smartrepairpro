@@ -2,6 +2,9 @@
 import React, { useEffect, useMemo, useRef, useState, Fragment } from "react";
 import { FiArrowRight, FiX } from "react-icons/fi";
 import { FaCar, FaLightbulb, FaHammer, FaCog, FaFileAlt } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const SERVICES = [
   {
@@ -91,7 +94,6 @@ const SERVICES = [
   },
 ];
 
-// Utility: find service by id
 const byId = (arr, id) => arr.find((s) => s.id === id) || null;
 
 export default function ServicesWithModal() {
@@ -99,7 +101,6 @@ export default function ServicesWithModal() {
   const active = useMemo(() => byId(SERVICES, activeId), [activeId]);
   const dialogRef = useRef(null);
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     if (!active) return;
     const prev = document.body.style.overflow;
@@ -109,15 +110,24 @@ export default function ServicesWithModal() {
     };
   }, [active]);
 
-  // Close on ESC, focus dialog on open
   useEffect(() => {
     if (!active) return;
     const onKey = (e) => e.key === "Escape" && setActiveId(null);
     window.addEventListener("keydown", onKey);
-    // focus after paint
     setTimeout(() => dialogRef.current?.focus(), 0);
     return () => window.removeEventListener("keydown", onKey);
   }, [active]);
+
+  // Slider settings
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    arrows: false,
+    swipe: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   return (
     <section id="services" className="py-20">
@@ -214,28 +224,30 @@ export default function ServicesWithModal() {
             >
               <p className="text-lg text-gray-500">{active.blurb}</p>
 
-              {/* Before / After */}
-              <div className="mt-6 grid gap-6 md:grid-cols-2">
-                <div className="space-y-3">
-                  <h3 className="text-lg font-semibold text-red-600">Before</h3>
-                  <div className="overflow-hidden rounded-lg">
-                    <img
-                      src={active.beforeImg || "/placeholder.svg?height=300&width=400"}
-                      alt={`${active.title} before repair`}
-                      className="h-64 w-full object-cover"
-                    />
+              {/* Slider Before / After */}
+              <div className="mt-6">
+                <Slider {...sliderSettings}>
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold text-red-600">Before</h3>
+                    <div className="overflow-hidden rounded-lg">
+                      <img
+                        src={active.beforeImg || "/placeholder.svg?height=300&width=400"}
+                        alt={`${active.title} before repair`}
+                        className="h-64 w-full object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-lg font-semibold text-green-600">After</h3>
-                  <div className="overflow-hidden rounded-lg">
-                    <img
-                      src={active.afterImg || "/placeholder.svg?height=300&width=400"}
-                      alt={`${active.title} after repair`}
-                      className="h-64 w-full object-cover"
-                    />
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold text-green-600">After</h3>
+                    <div className="overflow-hidden rounded-lg">
+                      <img
+                        src={active.afterImg || "/placeholder.svg?height=300&width=400"}
+                        alt={`${active.title} after repair`}
+                        className="h-64 w-full object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
+                </Slider>
               </div>
 
               {/* About */}
