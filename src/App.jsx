@@ -22,13 +22,6 @@ function App() {
        <Journey />
       <Story />
        <Expertise imageSrc="/wash.png"  />
-      {/* <Journey />
-      <Heritage />
-      <Expertise />
-      <Menu />
-      <InfoSection />
-      <Testimonials />
-      <Contact /> */}
       <Footer />
     </>
   )
