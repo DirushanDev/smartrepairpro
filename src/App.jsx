@@ -21,6 +21,7 @@ function App() {
        <Heritage />
        <Journey />
       <Story />
+       <Expertise imageSrc="/wash.png"  />
       {/* <Journey />
       <Heritage />
       <Expertise />

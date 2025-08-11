@@ -1,51 +1,58 @@
-import { Flame, Utensils } from 'lucide-react';
-import React from 'react';
-import { FaAward } from 'react-icons/fa'; // Importing icons from React Icons
+import React from "react";
+import { FiSettings, FiUser, FiTruck, FiAward } from "react-icons/fi";
 
-const expertiseData = [
-  {
-    icon: <FaAward className="text-3xl text-orange-400" />,
-    title: "Personal Inspection",
-    description:
-      "We personally inspect every cut of meat before it makes its way to the grill, ensuring only the finest quality reaches your plate.",
-  },
-  {
-    icon: <Utensils  className="text-3xl text-orange-400" />,
-    title: "Lifelong Experience",
-    description:
-      "With butchery experience from age 12 and a background in hunting and preparing meat in Africa, our founder brings unmatched understanding.",
-  },
-  {
-    icon: <Flame className="w-7 h-7 text-orange-400" />,
-    title: "Authentic Braai",
-    description:
-      "'Braai' means 'to cook meat over an open fire' in Southern Africa—bringing people together through flame, flavor, and unforgettable food.",
-  },
+const points = [
+  { id: 1, icon: FiSettings, text: "We're Experts" },
+  { id: 2, icon: FiUser, text: "We are young talented certified engineers" },
+  { id: 3, icon: FiTruck, text: "Fast Car Searvice" }, // keep text exactly like the mock
+  { id: 4, icon: FiAward, text: "Our Best Workers" },
 ];
 
-const Expertise = () => {
+export default function WeAreTheBest({ imageSrc = "/images/wash.jpg" }) {
   return (
-    <section id="expertise" className=" py-16 px-6">
-      <h2 className="text-4xl font-bold text-center mb-8 text-[#333]">Unmatched Expertise</h2>
-      <p className="text-xl text-center text-gray-600 mb-12">
-        Quality isn't just a promise—it's a way of life shaped by decades of experience.
-      </p>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {expertiseData.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            <div className="flex items-center justify-center mb-4">
-              <div className="bg-orange-100 p-3 rounded-full">{item.icon}</div>
-            </div>
-            <h3 className="text-xl font-semibold text-center text-green-700">{item.title}</h3>
-            <p className="text-center text-gray-600 mt-2">{item.description}</p>
+    <section className="w-full py-14">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          {/* Left: image */}
+          <div className="overflow-hidden rounded">
+            <img
+              src={imageSrc}
+              alt="Car wash"
+              className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
-        ))}
+
+          {/* Right: content */}
+          <div>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#2a2a2a]">
+              We Are The Best
+            </h2>
+            <div className="mt-2 h-1 w-16 bg-red-500" />
+
+            <p className="mt-6 text-gray-500 text-lg leading-relaxed max-w-2xl">
+              There are many variations of passages of Lorem Ipsum typesetting
+              industry has been the industry's standard dummy text ever since the
+              been when an unknown printer.
+            </p>
+
+            <ul className="mt-10 divide-y divide-gray-200 border-t border-b">
+              {points.map(({ id, icon: Icon, text }) => (
+                <li
+                  key={id}
+                  className="flex items-center gap-5 py-6"
+                >
+                  <span className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-md border border-red-200 text-red-500">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <p className="text-2xl font-semibold text-[#2a2a2a]">{text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default Expertise;
+}
