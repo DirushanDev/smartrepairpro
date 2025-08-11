@@ -1,13 +1,13 @@
 
-import Expertise from "./components/Expertise"
+import Wash from "./components/Expertise"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
-import Heritage from "./components/Heritage"
+import Service from "./components/Heritage"
 
-import Journey from "./components/Journey"
+import Qa from "./components/Journey"
 
 import Navbar from "./components/Navbar"
-import Story from "./components/Story"
+import Call from "./components/Story"
 
 
 function App() {
@@ -16,10 +16,10 @@ function App() {
     <>
       <Navbar />
       <Header />
-       <Heritage />
-       <Journey />
-      <Story />
-       <Expertise imageSrc="/wash.png"  />
+       <Service />
+       <Qa />
+      <Call />
+       <Wash imageSrc="/wash.png"  />
       <Footer />
     </>
   )
