@@ -99,6 +99,8 @@ const SERVICES = [
     gallery: [
       { before: "wheels-before.jpeg", after: "/wheels-after.jpeg" },
       { before: "wheels-before-2.jpeg", after: "wheels-after-2.jpeg" },
+      { before: "wheels-before-3.jpeg", after: "wheels-after-3.jpeg" },
+      { before: "wheels-before-4.jpeg", after: "wheels-after-4.jpeg" },
     ],
   },
   {
