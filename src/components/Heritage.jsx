@@ -285,7 +285,7 @@ export default function ServicesWithModal() {
                         {/* BEFORE */}
                         <div>
                           <h3 className="mb-2 text-base md:text-lg font-semibold text-red-600">Before</h3>
-                          <div className="rounded-2xl bg-gray-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
+                          <div className="rounded-2xl bg-white-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
                             <img
                               src={pair.before || "/placeholder.svg?height=300&width=400"}
                               alt={`${active.title} — before`}
@@ -297,7 +297,7 @@ export default function ServicesWithModal() {
                         {/* AFTER */}
                         <div>
                           <h3 className="mb-2 text-base md:text-lg font-semibold text-green-600">After</h3>
-                          <div className="rounded-2xl bg-gray-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
+                          <div className="rounded-2xl bg-white-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
                             <img
                               src={pair.after || "/placeholder.svg?height=300&width=400"}
                               alt={`${active.title} — after`}
