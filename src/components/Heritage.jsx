@@ -86,8 +86,8 @@ const SERVICES = [
     title: "Wheels & Calipers",
     icon: FaCog,
     blurb: "Complete wheel refurbishment and brake caliper restoration services",
-    beforeImg: "/images/services/wheels-before.jpg",
-    afterImg: "/images/services/wheels-after.jpg",
+    beforeImg: "wheels-after.jpeg",
+    afterImg: "wheels-before.jpeg",
     about:
       "We provide comprehensive wheel refurbishment including alloy wheel repair, powder coating, and brake caliper restoration. Our services handle curb damage, corrosion, and general wear to restore your wheels to perfect condition.",
     steps: [
@@ -97,7 +97,7 @@ const SERVICES = [
       "Caliper cleaning and refinishing",
     ],
     gallery: [
-      { before: "/images/services/wheels-before.jpg", after: "/images/services/wheels-after.jpg" },
+      { before: "wheels-before.jpeg", after: "/wheels-after.jpeg" },
       { before: "/images/services/wheels-before-2.jpg", after: "/images/services/wheels-after-2.jpg" },
     ],
   },
