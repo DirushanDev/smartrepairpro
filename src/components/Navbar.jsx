@@ -94,11 +94,7 @@ const Navbar = () => {
       {/* Mobile drawer */}
       <div className={`${open ? "block" : "hidden"} lg:hidden border-b border-gray-200 dark:border-neutral-800`}>
         <div className="mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          {/* Theme toggle (mobile drawer) — remove this if you don't want a second toggle */}
-          <div className="mb-3 flex items-center justify-between rounded-xl border border-gray-200 dark:border-neutral-700 p-3">
-            <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Theme</span>
-            <ThemeToggle />
-          </div>
+          
 
           <ul className="flex flex-col gap-2">
             <li>
