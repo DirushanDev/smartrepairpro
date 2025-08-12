@@ -45,8 +45,8 @@ const SERVICES = [
     icon: FaLightbulb,
     blurb:
       "Restore cloudy, yellowed headlights to crystal clear condition for improved visibility",
-    beforeImg: "/images/services/headlight-before.jpg",
-    afterImg: "/images/services/headlight-after.jpg",
+    beforeImg: "headlight-before.jpeg",
+    afterImg: "headlight-after.jpeg",
     about:
       "Over time, headlights become cloudy and yellowed due to UV exposure and oxidation. Our restoration process removes the damaged outer layer and applies a protective coating to prevent future deterioration.",
     steps: [
@@ -56,8 +56,12 @@ const SERVICES = [
       "UV protective coating for long-lasting clarity",
     ],
     gallery: [
-      { before: "/images/services/headlight-before.jpg", after: "/images/services/headlight-after.jpg" },
-      { before: "/images/services/headlight-before-2.jpg", after: "/images/services/headlight-after-2.jpg" },
+      { before: "headlight-before.jpeg", after: "headlight-after.jpeg" },
+      { before: "headlight-before-2.jpeg", after: "headlight-after-2.jpeg" },
+      { before: "headlight-before-3.jpeg", after: "headlight-after-3.jpeg" },
+       { before: "headlight-before-4.jpeg", after: "headlight-after-4.jpeg" },
+           { before: "headlight-before-5.jpeg", after: "headlight-after-5.jpeg" },
+              { before: "headlight-before-6.jpeg", after: "headlight-after-6.jpeg" },
     ],
   },
   {
