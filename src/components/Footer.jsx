@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="max-w-sm">
             <div className="mb-4 flex items-center gap-2">
               <img
-                src="/logo.jpeg" // replace with your logo path
+                src="/logo.png" // replace with your logo path
                 alt="SmartRepair Pro"
                 className="h-6 w-auto"
               />

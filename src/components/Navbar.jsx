@@ -15,7 +15,7 @@ const Navbar = () => {
         {/* Left: Logo + Brand */}
         <a href="/" className="flex items-center gap-3">
           <img
-            src="/logo.jpeg"
+            src="/logo.png"
             alt="SmartRepair Pro"
             className="h-7 w-auto sm:h-8"
           />

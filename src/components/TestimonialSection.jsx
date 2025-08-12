@@ -4,25 +4,70 @@ import { useRef, useState } from "react";
 const BG_IMG = "/src/assets/testimonials-bg.jpg";
 const DATA = [
   {
-    quote:
-      "There are many variations of passages of Lorem Ipsum typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    name: "John Williamson",
-    city: "Newyork City",
-    avatar: "/src/assets/avatar-john.jpg",
+    quote: `Great service with excellent customer care - the price was very reasonable and great value for money. I have an unusual coloured car, so in advance Shane paint matched my car colour — it was a perfect match & spot on. I then had a small dent removal and respray on part of my car. Shane also sorted a couple of extra little old scuffs & door opening chips (from previous ownership) and even put right a small scuff mark on the wheel trim for free when I picked the car up. Thanks Shane for going above and beyond and doing a great job — a trustworthy tradesman who really cares about customers. I would definitely recommend and use again!`,
+    name: "Lou Nad",
+    city: "United Kingdom",
+    avatar: "Lou Nad.png",
   },
   {
-    quote:
-      "Typesetting has evolved, but great service hasn’t. SmartRepair Pro delivered beyond expectations—fast, friendly, and reliable. I’d recommend them in a heartbeat!",
-    name: "Sara Thompson",
-    city: "Los Angeles",
-    avatar: "/src/assets/avatar-sara.jpg",
+    quote: `I used SL Smart Repairs today for the first time following a recommendation. Shane was approachable and honest. There was minor bodywork damage to the rear passenger wing of the car. Shane fixed it immediately on the spot and declined payment, as it was a minor job. Very refreshing to see such an honest work ethic today.`,
+    name: "Vince K",
+    city: "United Kingdom",
+    avatar: "Vince K.png",
   },
   {
-    quote:
-      "From booking to delivery, everything was smooth. The team communicated clearly and the result was flawless. Five stars from me.",
-    name: "Liam Carter",
-    city: "Chicago",
-    avatar: "/src/assets/avatar-liam.jpg",
+    quote: `Have had to use S L Smart Repair twice this year due to malicious damage and a vehicle driving down the side of my car causing damage to the door, back wing and alloy — and what a fantastic job from S L Smart Repair. Fast and efficient services provided; we regularly use them as a valet. Would highly recommend.`,
+    name: "Katie Holman",
+    city: "United Kingdom",
+    avatar: "Katie Holman.png",
+  },
+  {
+    quote: `We have used Shane numerous times now and always been so happy with all of the jobs he’s done for us. Our car went to the garage for a parking sensor fault and ended up being damaged in the process — we knew exactly who we wanted to put it right. Shane worked his magic, putting it back to even better than it was before. He is very professional, competitively priced (you get what you pay for with body work), and his setup lets him work in all weathers. Don’t shop around — just book in with Shane if you care about your car and want a proper professional job. I’ll never go anywhere else — the best around in my opinion. ❤️`,
+    name: "Chloe Lee-Shield",
+    city: "United Kingdom",
+    avatar: "Chloe Lee-Shield.png",
+  },
+  {
+    quote: `I had some damage to my front bumper and wing. Shane booked me in and managed to fix the paint then and there. Seriously impressive! He’s very knowledgeable and a true professional. Would definitely recommend to anyone looking for a repair to their vehicle. Thanks again.`,
+    name: "Max Souter",
+    city: "United Kingdom",
+    avatar: "Max Souter.png",
+  },
+  {
+    quote: `Booked my wife’s Toyota Yaris in with Shane for a rear bumper scuff. Shane is really easy to deal with and a skilled, experienced professional. Fair price and honest advice. Pleased with the quality of work — spot-on paint finish and colour match, and same-day service. Would highly recommend Shane.`,
+    name: "Ajay Chauhan",
+    city: "United Kingdom",
+    avatar: "Ajay Chauhan.png",
+  },
+  {
+    quote: `Bought a car at auction with some scrapes and scratches and thanks to Shane at SL Smart Repairs, the car looks new. Much better value than a bodywork shop. Booked in to take another car next month.`,
+    name: "Jonathan Cameron",
+    city: "United Kingdom",
+    avatar: "Jonathan Cameron.png",
+  },
+  {
+    quote: `I would recommend anyone to use SL smart repairs. I had a scuff on my pride and joy so I contacted Shane, sent a picture of the damage and was booked in promptly for the following week.
+Superb work you cannot tell my bumper has been repaired and fast turnaround also. I will certainly use again.
+Shane knows what he is doing, offers good advice and is a nice guy to deal with top service. Thanks SL smart repairs!`,
+    name: "TM",
+    city: "United Kingdom",
+    avatar: "TM.png",
+  },
+  {
+    quote: `I was looking for someone to repair the damage to my bumper and came across SL Repairs in Wigston, a short drive away. Shane was very knowledgeable and courteous and had my car repaired at a VERY reasonable price! Thank you for your hard work!`,
+    name: "James",
+    city: "United Kingdom",
+    avatar: "James.png",
+  },
+  {
+    quote: `Brilliant job on my Alfa Giulia, despite an unusual shade of white. Also touched up some minor blemishes that I hadn’t even noticed.
+
+Will definitely be back to sort out some other paint issues caused by a previous owner.
+
+Would highly recommend.`,
+    name: "Alistair Singer",
+    city: "United Kingdom",
+    avatar: "Alistair Singer.png",
   },
 ];
 
