@@ -25,7 +25,7 @@ export default function ThemeToggle({ className = "" }) {
                   dark:bg-neutral-800 dark:text-gray-100 dark:border-neutral-700 ${className}`}
       aria-label="Toggle dark mode"
     >
-      {isDark ? "🌙 Dark" : "☀️ Light"}
+      {isDark ? "🌙" : "☀️ "}
     </button>
   );
 }

@@ -1,4 +1,6 @@
+// src/components/Navbar.jsx
 import React, { useState, useEffect } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -10,7 +12,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
+    <header className="sticky top-0 z-50 w-full bg-white dark:bg-neutral-950 border-b border-gray-200 dark:border-neutral-800">
       <nav className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Left: Logo + Brand */}
         <a href="/" className="flex items-center gap-3">
@@ -19,40 +21,50 @@ const Navbar = () => {
             alt="SmartRepair Pro"
             className="h-7 w-auto sm:h-8"
           />
-          <span className="text-xl sm:text-2xl font-bold tracking-tight text-black">
+          <span className="text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-white">
             SmartRepair Pro
           </span>
         </a>
 
         {/* Center: Nav (desktop only) */}
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 text-lg text-gray-500 lg:flex">
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 text-lg text-gray-600 dark:text-gray-300 lg:flex">
           <li>
-            <a href="#services" className="hover:text-black transition-colors">
+            <a href="#services" className="transition-colors hover:text-black dark:hover:text-white">
               Services
             </a>
           </li>
           <li>
-            <a href="#about" className="hover:text-black transition-colors">
+            <a href="#about" className="transition-colors hover:text-black dark:hover:text-white">
               About
             </a>
           </li>
           <li>
-            <a href="#contact" className="hover:text-black transition-colors">
+            <a href="#contact" className="transition-colors hover:text-black dark:hover:text-white">
               Contact
             </a>
           </li>
         </ul>
 
-        {/* Right: CTA + Hamburger (mobile) */}
+        {/* Right: Theme toggle(s) + CTA + Hamburger */}
         <div className="flex items-center gap-2">
+          {/* Theme toggle (mobile, shown BEFORE hamburger) */}
+          <div className="md:hidden">
+            <ThemeToggle />
+          </div>
+
+          {/* Theme toggle (desktop) */}
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
+
           <a
             href="#quote"
-            className="hidden md:inline-block rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+            className="hidden md:inline-block rounded-xl px-4 py-2 text-sm font-semibold text-white bg-black hover:opacity-90 dark:bg-white dark:text-black"
           >
             Get Quote
           </a>
 
-          {/* Hamburger (no SVGs) */}
+          {/* Hamburger */}
           <button
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -61,17 +73,17 @@ const Navbar = () => {
           >
             <span className="sr-only">Menu</span>
             <span
-              className={`absolute block h-0.5 w-7 bg-black transition-transform duration-300 ${
+              className={`absolute block h-0.5 w-7 bg-black dark:bg-white transition-transform duration-300 ${
                 open ? "translate-y-0 rotate-45" : "-translate-y-2"
               }`}
             />
             <span
-              className={`absolute block h-0.5 w-7 bg-black transition-opacity duration-300 ${
+              className={`absolute block h-0.5 w-7 bg-black dark:bg-white transition-opacity duration-300 ${
                 open ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
-              className={`absolute block h-0.5 w-7 bg-black transition-transform duration-300 ${
+              className={`absolute block h-0.5 w-7 bg-black dark:bg-white transition-transform duration-300 ${
                 open ? "translate-y-0 -rotate-45" : "translate-y-2"
               }`}
             />
@@ -80,14 +92,20 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile drawer */}
-      <div className={`${open ? "block" : "hidden"} lg:hidden border-b border-gray-200`}>
+      <div className={`${open ? "block" : "hidden"} lg:hidden border-b border-gray-200 dark:border-neutral-800`}>
         <div className="mx-auto px-4 py-4 sm:px-6 lg:px-8">
+          {/* Theme toggle (mobile drawer) — remove this if you don't want a second toggle */}
+          <div className="mb-3 flex items-center justify-between rounded-xl border border-gray-200 dark:border-neutral-700 p-3">
+            <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Theme</span>
+            <ThemeToggle />
+          </div>
+
           <ul className="flex flex-col gap-2">
             <li>
               <a
                 href="#services"
                 onClick={() => setOpen(false)}
-                className="block rounded-xl px-3 py-3 text-base font-medium text-gray-800 hover:bg-gray-50"
+                className="block rounded-xl px-3 py-3 text-base font-medium text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-neutral-900"
               >
                 Services
               </a>
@@ -96,7 +114,7 @@ const Navbar = () => {
               <a
                 href="#about"
                 onClick={() => setOpen(false)}
-                className="block rounded-xl px-3 py-3 text-base font-medium text-gray-800 hover:bg-gray-50"
+                className="block rounded-xl px-3 py-3 text-base font-medium text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-neutral-900"
               >
                 About
               </a>
@@ -105,15 +123,17 @@ const Navbar = () => {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="block rounded-xl px-3 py-3 text-base font-medium text-gray-800 hover:bg-gray-50"
+                className="block rounded-xl px-3 py-3 text-base font-medium text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-neutral-900"
               >
                 Contact
               </a>
             </li>
           </ul>
+
           <a
             href="#quote"
-            className="mt-3 inline-block w-full rounded-2xl bg-black px-5 py-3 text-center text-sm font-semibold text-white shadow-sm hover:opacity-90"
+            onClick={() => setOpen(false)}
+            className="mt-3 inline-block w-full rounded-2xl px-5 py-3 text-center text-sm font-semibold text-white bg-black hover:opacity-90 dark:bg-white dark:text-black"
           >
             Get Quote
           </a>
