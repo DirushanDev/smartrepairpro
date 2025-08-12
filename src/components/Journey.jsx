@@ -7,7 +7,7 @@ const WhyChoose = () => {
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold">
+          <h2 className="text-3xl md:text-4xl font-bold dark:text-black">
             Why Choose SmartRepair Pro?
           </h2>
         </div>
@@ -15,7 +15,7 @@ const WhyChoose = () => {
         {/* Features Grid */}
         <div className="grid gap-12 md:grid-cols-3">
           {/* Item 1 */}
-          <div className="text-center">
+          <div className="text-center dark:text-black">
             <div className="bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <FaCar className="text-2xl text-black" />
             </div>

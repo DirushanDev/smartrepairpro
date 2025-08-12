@@ -206,7 +206,7 @@ export default function ServicesWithModal() {
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
                     {Icon ? <Icon className="text-black" /> : null}
                   </span>
-                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                  <h3 className="text-xl font-semibold dark:text-black">{service.title}</h3>
                 </header>
 
                 <p className="text-gray-500">{service.blurb}</p>
