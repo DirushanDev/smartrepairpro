@@ -98,7 +98,7 @@ const SERVICES = [
     ],
     gallery: [
       { before: "wheels-before.jpeg", after: "/wheels-after.jpeg" },
-      { before: "/images/services/wheels-before-2.jpg", after: "/images/services/wheels-after-2.jpg" },
+      { before: "wheels-before-2.jpeg", after: "wheels-after-2.jpeg" },
     ],
   },
   {
@@ -208,7 +208,7 @@ export default function ServicesWithModal() {
                   <img
                     src={cardPreview}
                     alt={`${service.title} — preview before image`}
-                    className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
                   <span className="absolute left-2 top-2 inline-flex w-fit items-center justify-center rounded-md bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
