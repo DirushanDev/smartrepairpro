@@ -8,7 +8,7 @@ import Qa from "./components/Journey"
 
 import Navbar from "./components/Navbar"
 import Call from "./components/Story"
-
+import TestimonialSection from "./components/TestimonialSection";
 
 function App() {
 
@@ -20,6 +20,7 @@ function App() {
        <Qa />
       <Call />
        <Wash imageSrc="/wash.png"  />
+       <TestimonialSection />
       <Footer />
     </>
   )
