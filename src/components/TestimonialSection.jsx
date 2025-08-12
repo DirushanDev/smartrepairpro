@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
-
-// images (replace with yours)
+import { Quote } from "lucide-react";
+// background image
 const BG_IMG = "/src/assets/testimonials-bg.jpg";
+
+// 10 reviews (UK). Avatars should exist in /public or /src as you set.
 const DATA = [
   {
     quote: `Great service with excellent customer care - the price was very reasonable and great value for money. I have an unusual coloured car, so in advance Shane paint matched my car colour — it was a perfect match & spot on. I then had a small dent removal and respray on part of my car. Shane also sorted a couple of extra little old scuffs & door opening chips (from previous ownership) and even put right a small scuff mark on the wheel trim for free when I picked the car up. Thanks Shane for going above and beyond and doing a great job — a trustworthy tradesman who really cares about customers. I would definitely recommend and use again!`,
@@ -47,8 +49,7 @@ const DATA = [
   },
   {
     quote: `I would recommend anyone to use SL smart repairs. I had a scuff on my pride and joy so I contacted Shane, sent a picture of the damage and was booked in promptly for the following week.
-Superb work you cannot tell my bumper has been repaired and fast turnaround also. I will certainly use again.
-Shane knows what he is doing, offers good advice and is a nice guy to deal with top service. Thanks SL smart repairs!`,
+Superb work — you cannot tell my bumper has been repaired — and fast turnaround too. I will certainly use again. Shane knows what he is doing, offers good advice and is a nice guy to deal with. Top service. Thanks SL smart repairs!`,
     name: "TM",
     city: "United Kingdom",
     avatar: "TM.png",
@@ -60,11 +61,7 @@ Shane knows what he is doing, offers good advice and is a nice guy to deal with 
     avatar: "James.png",
   },
   {
-    quote: `Brilliant job on my Alfa Giulia, despite an unusual shade of white. Also touched up some minor blemishes that I hadn’t even noticed.
-
-Will definitely be back to sort out some other paint issues caused by a previous owner.
-
-Would highly recommend.`,
+    quote: `Brilliant job on my Alfa Giulia, despite an unusual shade of white. Also touched up some minor blemishes that I hadn’t even noticed. Will definitely be back to sort out some other paint issues caused by a previous owner. Would highly recommend.`,
     name: "Alistair Singer",
     city: "United Kingdom",
     avatar: "Alistair Singer.png",
@@ -103,15 +100,13 @@ export default function TestimonialSection() {
 
   return (
     <section aria-labelledby="testimonials-title">
-      {/* background in normal flow */}
       <div
         className="relative w-full bg-center bg-cover"
         style={{ backgroundImage: `url(${BG_IMG})` }}
       >
-        {/* red overlay */}
+        {/* red overlay (full). If you want shorter: use inset-x-0 top-0 h-1/2 */}
         <div className="absolute inset-0 bg-[#e53935]/90" />
 
-        {/* content */}
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-28 text-center text-white">
           <h2
             id="testimonials-title"
@@ -125,14 +120,12 @@ export default function TestimonialSection() {
           </div>
 
           <p className="mx-auto mt-5 max-w-3xl text-sm sm:text-base leading-6 sm:leading-7 text-white/90">
-            There are many variations of passages of Lorem Ipsum typesetting
-            industry has been the industry's standard dummy text ever since the
-            been when an unknown printer.
+            Real feedback from happy customers across the UK. Swipe on mobile or use the arrows.
           </p>
 
-          {/* slider area (adds side gutter on md+ so arrows can sit outside) */}
+          {/* slider area */}
           <div className="relative mt-12 sm:mt-16 lg:mt-20 md:px-12 lg:px-16">
-            {/* desktop/tablet arrows — pushed OUTSIDE on md+ */}
+            {/* desktop/tablet arrows */}
             <button
               onClick={prev}
               className="hidden sm:flex absolute left-4 sm:left-8 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none"
@@ -148,7 +141,7 @@ export default function TestimonialSection() {
               ›
             </button>
 
-            {/* visible slide (touch-enabled on mobile) */}
+            {/* current slide */}
             <div
               className="mx-auto max-w-5xl rounded-lg bg-white px-4 py-10 shadow-md sm:px-8 md:px-12 lg:px-16 overflow-hidden"
               style={{ minHeight: 380 }}
@@ -156,7 +149,6 @@ export default function TestimonialSection() {
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
             >
-              {/* drag translate hint on mobile */}
               <div
                 className="transition-transform duration-200 will-change-transform"
                 style={{
@@ -166,15 +158,17 @@ export default function TestimonialSection() {
                       : "translateX(0)",
                 }}
               >
-                {/* avatar + badge fully inside card */}
-                <div className="relative mx-auto mb-4 flex h-20 w-20 items-center justify-center">
+                {/* avatar + badge */}
+                <div className="relative mx-auto mb-4 h-24 w-24">
                   <img
                     src={item.avatar}
-                    className="h-20 w-20 rounded-full border-[6px] border-white shadow-md object-cover"
+                    className="h-24 w-24 rounded-full ring-8 ring-white shadow-lg object-cover"
                     alt={item.name}
                   />
-                  <span className="absolute -bottom-2 -right-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#e53935] text-white text-xl font-bold">
-                    ”
+                  {/* bottom-left badge (like your screenshot) */}
+                  <span className="absolute bottom-0 -left-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#e53935] text-white shadow-md">
+                  <Quote className="h-4 w-4 text-white rotate-180 " strokeWidth={2} />
+
                   </span>
                 </div>
 
@@ -185,32 +179,24 @@ export default function TestimonialSection() {
                 </blockquote>
 
                 <div className="mt-8">
-                  <h3 className="text-xl sm:text-2xl font-semibold text-black">
-                    {item.name}
-                  </h3>
-                  <p className="mt-1 text-sm sm:text-base text-[#e53935] italic">
-                    {item.city}
-                  </p>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-black">{item.name}</h3>
+                  <p className="mt-1 text-sm sm:text-base text-[#e53935] italic">{item.city}</p>
                 </div>
               </div>
             </div>
 
-            {/* mobile arrows + dots */}
-            <div className="mt-6 flex items-center justify-center gap-4 sm:hidden">
-             
-              <div className="flex items-center gap-2">
-                {DATA.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setI(idx)}
-                    className={`h-2.5 w-2.5 rounded-full ${
-                      i === idx ? "bg-white" : "bg-white/50"
-                    }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-             
+            {/* mobile dots */}
+            <div className="mt-6 flex items-center justify-center gap-2 sm:hidden">
+              {DATA.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setI(idx)}
+                  className={`h-2.5 w-2.5 rounded-full ${
+                    i === idx ? "bg-[#e53935]" : "bg-black/20"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
