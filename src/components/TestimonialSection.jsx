@@ -48,7 +48,7 @@ export default function TestimonialSection() {
   };
   const onTouchEnd = () => {
     touchActive.current = false;
-    const threshold = 60; // swipe distance to trigger
+    const threshold = 60;
     if (dragX <= -threshold) next();
     else if (dragX >= threshold) prev();
     setDragX(0);
@@ -85,19 +85,19 @@ export default function TestimonialSection() {
             been when an unknown printer.
           </p>
 
-          {/* slider area */}
-          <div className="relative mt-12 sm:mt-16 lg:mt-20">
-            {/* desktop arrows */}
+          {/* slider area (adds side gutter on md+ so arrows can sit outside) */}
+          <div className="relative mt-12 sm:mt-16 lg:mt-20 md:px-12 lg:px-16">
+            {/* desktop/tablet arrows — pushed OUTSIDE on md+ */}
             <button
               onClick={prev}
-              className="hidden sm:flex absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none"
+              className="hidden sm:flex absolute left-4 sm:left-8 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none"
               aria-label="Previous"
             >
               ‹
             </button>
             <button
               onClick={next}
-              className="hidden sm:flex absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none"
+              className="hidden sm:flex absolute right-4 sm:right-8 md:-right-10 lg:-right-12 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none"
               aria-label="Next"
             >
               ›
@@ -106,7 +106,7 @@ export default function TestimonialSection() {
             {/* visible slide (touch-enabled on mobile) */}
             <div
               className="mx-auto max-w-5xl rounded-lg bg-white px-4 py-10 shadow-md sm:px-8 md:px-12 lg:px-16 overflow-hidden"
-              style={{ minHeight: 380 }} // gentle floor to stop jump
+              style={{ minHeight: 380 }}
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
