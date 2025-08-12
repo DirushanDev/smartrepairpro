@@ -1,10 +1,20 @@
-// ServicesWithModal.jsx
 import React, { useEffect, useMemo, useRef, useState, Fragment } from "react";
-import { FiArrowRight, FiX } from "react-icons/fi";
+import { FiArrowRight, FiArrowLeft, FiX } from "react-icons/fi";
 import { FaCar, FaLightbulb, FaHammer, FaCog, FaFileAlt } from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+/**
+ * ServicesWithModal
+ * - Card grid of services
+ * - Click a card to open a modal
+ * - In the modal: BEFORE & AFTER shown side-by-side on desktop (stacked on mobile)
+ * - Slider moves through many BEFORE/AFTER pairs
+ * - ESC to close, overlay click to close, scroll lock while open
+ *
+ * NOTE: Replace image paths with yours. Each service supports many before/after pairs via `gallery`.
+ */
 
 const SERVICES = [
   {
@@ -23,6 +33,11 @@ const SERVICES = [
       "Color matching and paint correction",
       "Polishing and protective coating application",
     ],
+    gallery: [
+      { before: "/images/services/scratches-before.jpg", after: "/images/services/scratches-after.jpg" },
+      { before: "/images/services/scratches-before-2.jpg", after: "/images/services/scratches-after-2.jpg" },
+      { before: "/images/services/scratches-before-3.jpg", after: "/images/services/scratches-after-3.jpg" },
+    ],
   },
   {
     id: "headlights",
@@ -39,6 +54,10 @@ const SERVICES = [
       "Progressive sanding to remove oxidation",
       "Polishing compound application",
       "UV protective coating for long-lasting clarity",
+    ],
+    gallery: [
+      { before: "/images/services/headlight-before.jpg", after: "/images/services/headlight-after.jpg" },
+      { before: "/images/services/headlight-before-2.jpg", after: "/images/services/headlight-after-2.jpg" },
     ],
   },
   {
@@ -57,13 +76,16 @@ const SERVICES = [
       "Gradual pressure application to restore shape",
       "Final inspection and quality check",
     ],
+    gallery: [
+      { before: "/images/services/dent-before.jpg", after: "/images/services/dent-after.jpg" },
+      { before: "/images/services/dent-before-2.jpg", after: "/images/services/dent-after-2.jpg" },
+    ],
   },
   {
     id: "wheels",
     title: "Wheels & Calipers",
     icon: FaCog,
-    blurb:
-      "Complete wheel refurbishment and brake caliper restoration services",
+    blurb: "Complete wheel refurbishment and brake caliper restoration services",
     beforeImg: "/images/services/wheels-before.jpg",
     afterImg: "/images/services/wheels-after.jpg",
     about:
@@ -73,6 +95,10 @@ const SERVICES = [
       "Damage repair and surface preparation",
       "Professional powder coating or painting",
       "Caliper cleaning and refinishing",
+    ],
+    gallery: [
+      { before: "/images/services/wheels-before.jpg", after: "/images/services/wheels-after.jpg" },
+      { before: "/images/services/wheels-before-2.jpg", after: "/images/services/wheels-after-2.jpg" },
     ],
   },
   {
@@ -91,10 +117,29 @@ const SERVICES = [
       "Cost-effective repair solutions",
       "Final quality assurance check",
     ],
+    gallery: [
+      { before: "/images/services/lease-before.jpg", after: "/images/services/lease-after.jpg" },
+      { before: "/images/services/lease-before-2.jpg", after: "/images/services/lease-after-2.jpg" },
+    ],
   },
 ];
 
 const byId = (arr, id) => arr.find((s) => s.id === id) || null;
+
+function Arrow({ className, style, onClick, direction }) {
+  return (
+    <button
+      type="button"
+      aria-label={direction === "next" ? "Next" : "Previous"}
+      onClick={onClick}
+      className={`absolute top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/90 hover:bg-white shadow p-2 ${
+        direction === "next" ? "right-2" : "left-2"
+      }`}
+    >
+    
+    </button>
+  );
+}
 
 export default function ServicesWithModal() {
   const [activeId, setActiveId] = useState(null);
@@ -118,21 +163,21 @@ export default function ServicesWithModal() {
     return () => window.removeEventListener("keydown", onKey);
   }, [active]);
 
-  // Slider settings
-  const sliderSettings = {
+  const modalSliderSettings = {
     dots: true,
+    arrows: true,
     infinite: true,
     speed: 500,
-    arrows: false,
-    swipe: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    adaptiveHeight: true,
+    nextArrow: <Arrow direction="next" />,
+    prevArrow: <Arrow direction="prev" />,
   };
 
   return (
     <section id="services" className="py-20">
       <div className="mx-auto max-w-7xl px-4">
-        {/* Heading */}
         <div className="mb-12 text-center">
           <h2 className="mb-3 text-3xl font-bold md:text-4xl">Our Expert Services</h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-500">
@@ -140,44 +185,47 @@ export default function ServicesWithModal() {
           </p>
         </div>
 
-        {/* Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map(({ id, title, blurb, icon: Icon, beforeImg }) => (
-            <article
-              key={id}
-              onClick={() => setActiveId(id)}
-              className="group flex cursor-pointer flex-col gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-            >
-              <header className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
-                  <Icon className="text-black" />
-                </span>
-                <h3 className="text-xl font-semibold">{title}</h3>
-              </header>
-
-              <p className="text-gray-500">{blurb}</p>
-
-              <div className="relative overflow-hidden rounded-lg">
-                <img
-                  src={beforeImg || "/placeholder.svg?height=300&width=400"}
-                  alt={`${title} before`}
-                  className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  loading="lazy"
-                />
-                <span className="absolute left-2 top-2 inline-flex w-fit items-center justify-center rounded-md bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
-                  Before
-                </span>
-              </div>
-
-              <button
-                type="button"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+          {SERVICES.map((service) => {
+            const Icon = service.icon;
+            const cardPreview = service.gallery?.[0]?.before || service.beforeImg || "/placeholder.svg?height=300&width=400";
+            return (
+              <article
+                key={service.id}
+                onClick={() => setActiveId(service.id)}
+                className="group flex cursor-pointer flex-col gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                View Before & After
-                <FiArrowRight className="h-4 w-4" />
-              </button>
-            </article>
-          ))}
+                <header className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
+                    {Icon ? <Icon className="text-black" /> : null}
+                  </span>
+                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                </header>
+
+                <p className="text-gray-500">{service.blurb}</p>
+
+                <div className="relative overflow-hidden rounded-lg">
+                  <img
+                    src={cardPreview}
+                    alt={`${service.title} — preview before image`}
+                    className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                  <span className="absolute left-2 top-2 inline-flex w-fit items-center justify-center rounded-md bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
+                    Before
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                >
+                  View Before & After
+                 
+                </button>
+              </article>
+            );
+          })}
         </div>
       </div>
 
@@ -190,18 +238,19 @@ export default function ServicesWithModal() {
             aria-hidden="true"
             onClick={() => setActiveId(null)}
           />
-          {/* Dialog */}
+
+          {/* Dialog (no border; desktop side-by-side style) */}
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="service-title"
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-white shadow-2xl"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-start justify-between gap-4 border-b px-6 py-5">
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gray-100">
-                  {active.icon ? <active.icon /> : null}
+                  {active.icon ? (() => { const Icon = active.icon; return <Icon />; })() : null}
                 </span>
                 <h2 id="service-title" className="text-2xl font-semibold">
                   {active.title}
@@ -220,33 +269,46 @@ export default function ServicesWithModal() {
             <div
               ref={dialogRef}
               tabIndex={-1}
-              className="max-h-[70vh] overflow-y-auto px-6 py-6 focus:outline-none"
+              className="max-h-[80vh] overflow-y-auto px-6 py-6 focus:outline-none"
             >
-              <p className="text-lg text-gray-500">{active.blurb}</p>
+              <p className="text-lg text-gray-600">{active.blurb}</p>
 
-              {/* Slider Before / After */}
-              <div className="mt-6">
-                <Slider {...sliderSettings}>
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-semibold text-red-600">Before</h3>
-                    <div className="overflow-hidden rounded-lg">
-                      <img
-                        src={active.beforeImg || "/placeholder.svg?height=300&width=400"}
-                        alt={`${active.title} before repair`}
-                        className="h-64 w-full object-cover"
-                      />
+              {/* Slider: EACH SLIDE shows BEFORE & AFTER side-by-side on desktop */}
+              <div className="mt-6 relative">
+                <Slider {...modalSliderSettings}>
+                  {(active.gallery && active.gallery.length > 0
+                    ? active.gallery
+                    : [{ before: active.beforeImg, after: active.afterImg }]
+                  ).map((pair, idx) => (
+                    <div key={idx} className="px-2">
+                      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        {/* BEFORE */}
+                        <div>
+                          <h3 className="mb-2 text-base md:text-lg font-semibold text-red-600">Before</h3>
+                          <div className="rounded-2xl bg-gray-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
+                            <img
+                              src={pair.before || "/placeholder.svg?height=300&width=400"}
+                              alt={`${active.title} — before`}
+                              className="h-full w-64 object-cover rounded-lg"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                        {/* AFTER */}
+                        <div>
+                          <h3 className="mb-2 text-base md:text-lg font-semibold text-green-600">After</h3>
+                          <div className="rounded-2xl bg-gray-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
+                            <img
+                              src={pair.after || "/placeholder.svg?height=300&width=400"}
+                              alt={`${active.title} — after`}
+                              className="h-full w-64 object-cover rounded-lg"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-semibold text-green-600">After</h3>
-                    <div className="overflow-hidden rounded-lg">
-                      <img
-                        src={active.afterImg || "/placeholder.svg?height=300&width=400"}
-                        alt={`${active.title} after repair`}
-                        className="h-64 w-full object-cover"
-                      />
-                    </div>
-                  </div>
+                  ))}
                 </Slider>
               </div>
 
@@ -273,7 +335,7 @@ export default function ServicesWithModal() {
               </div>
 
               {/* Actions */}
-              <div className="mt-6 flex gap-4">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#quote"
                   className="flex-1 inline-flex items-center justify-center rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
