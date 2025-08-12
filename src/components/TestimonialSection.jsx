@@ -197,13 +197,7 @@ export default function TestimonialSection() {
 
             {/* mobile arrows + dots */}
             <div className="mt-6 flex items-center justify-center gap-4 sm:hidden">
-              <button
-                onClick={prev}
-                className="h-11 w-11 rounded bg-white text-black shadow hover:bg-gray-100"
-                aria-label="Previous"
-              >
-                ‹
-              </button>
+             
               <div className="flex items-center gap-2">
                 {DATA.map((_, idx) => (
                   <button
@@ -216,13 +210,7 @@ export default function TestimonialSection() {
                   />
                 ))}
               </div>
-              <button
-                onClick={next}
-                className="h-11 w-11 rounded bg-white text-black shadow hover:bg-gray-100"
-                aria-label="Next"
-              >
-                ›
-              </button>
+             
             </div>
           </div>
         </div>
