@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Quote } from "lucide-react";
+
 // background image
 const BG_IMG = "/src/assets/testimonials-bg.jpg";
 
@@ -104,7 +105,7 @@ export default function TestimonialSection() {
         className="relative w-full bg-center bg-cover"
         style={{ backgroundImage: `url(${BG_IMG})` }}
       >
-        {/* red overlay (full). If you want shorter: use inset-x-0 top-0 h-1/2 */}
+        {/* red overlay */}
         <div className="absolute inset-0 bg-[#e53935]/90" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-28 text-center text-white">
@@ -128,14 +129,16 @@ export default function TestimonialSection() {
             {/* desktop/tablet arrows */}
             <button
               onClick={prev}
-              className="hidden sm:flex absolute left-4 sm:left-8 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none"
+              className="hidden sm:flex absolute left-4 sm:left-8 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none
+                         dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800"
               aria-label="Previous"
             >
               ‹
             </button>
             <button
               onClick={next}
-              className="hidden sm:flex absolute right-4 sm:right-8 md:-right-10 lg:-right-12 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none"
+              className="hidden sm:flex absolute right-4 sm:right-8 md:-right-10 lg:-right-12 top-1/2 -translate-y-1/2 h-14 w-14 items-center justify-center rounded bg-white text-black shadow hover:bg-gray-100 focus:outline-none
+                         dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800"
               aria-label="Next"
             >
               ›
@@ -143,7 +146,8 @@ export default function TestimonialSection() {
 
             {/* current slide */}
             <div
-              className="mx-auto max-w-5xl rounded-lg bg-white px-4 py-10 shadow-md sm:px-8 md:px-12 lg:px-16 overflow-hidden"
+              className="mx-auto max-w-5xl rounded-lg bg-white px-4 py-10 shadow-md sm:px-8 md:px-12 lg:px-16 overflow-hidden
+                         text-gray-800 dark:bg-neutral-900 dark:text-gray-100"
               style={{ minHeight: 380 }}
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
@@ -162,24 +166,23 @@ export default function TestimonialSection() {
                 <div className="relative mx-auto mb-4 h-24 w-24">
                   <img
                     src={item.avatar}
-                    className="h-24 w-24 rounded-full ring-8 ring-white shadow-lg object-cover"
+                    className="h-24 w-24 rounded-full ring-8 ring-white dark:ring-neutral-900 shadow-lg object-cover"
                     alt={item.name}
                   />
-                  {/* bottom-left badge (like your screenshot) */}
+                  {/* bottom-left badge */}
                   <span className="absolute bottom-0 -left-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#e53935] text-white shadow-md">
-                  <Quote className="h-4 w-4 text-white rotate-180 " strokeWidth={2} />
-
+                    <Quote className="h-4 w-4 text-white rotate-180" strokeWidth={2} />
                   </span>
                 </div>
 
-                <blockquote className="mx-auto max-w-4xl text-gray-800">
+                <blockquote className="mx-auto max-w-4xl">
                   <p className="text-base sm:text-lg md:text-xl italic leading-7 sm:leading-8 md:leading-9">
                     {item.quote}
                   </p>
                 </blockquote>
 
                 <div className="mt-8">
-                  <h3 className="text-xl sm:text-2xl font-semibold text-black">{item.name}</h3>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-black dark:text-white">{item.name}</h3>
                   <p className="mt-1 text-sm sm:text-base text-[#e53935] italic">{item.city}</p>
                 </div>
               </div>
@@ -192,7 +195,9 @@ export default function TestimonialSection() {
                   key={idx}
                   onClick={() => setI(idx)}
                   className={`h-2.5 w-2.5 rounded-full ${
-                    i === idx ? "bg-[#e53935]" : "bg-black/20"
+                    i === idx
+                      ? "bg-[#e53935]"
+                      : "bg-black/20 dark:bg-white/30"
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />

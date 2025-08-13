@@ -6,11 +6,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 /**
- * ServicesWithModal
+ * ServicesWithModal (dark-mode ready)
  * - Card grid of services
  * - Click a card to open a modal
- * - In the modal: BEFORE & AFTER shown side-by-side on desktop (stacked on mobile)
- * - Slider moves through many BEFORE/AFTER pairs
+ * - In the modal: BEFORE & AFTER side-by-side (desktop) / stacked (mobile)
+ * - Slider for multiple pairs
  * - ESC to close, overlay click to close, scroll lock while open
  *
  * NOTE: Replace image paths with yours. Each service supports many before/after pairs via `gallery`.
@@ -59,9 +59,9 @@ const SERVICES = [
       { before: "headlight-before.jpeg", after: "headlight-after.jpeg" },
       { before: "headlight-before-2.jpeg", after: "headlight-after-2.jpeg" },
       { before: "headlight-before-3.jpeg", after: "headlight-after-3.jpeg" },
-       { before: "headlight-before-4.jpeg", after: "headlight-after-4.jpeg" },
-           { before: "headlight-before-5.jpeg", after: "headlight-after-5.jpeg" },
-              { before: "headlight-before-6.jpeg", after: "headlight-after-6.jpeg" },
+      { before: "headlight-before-4.jpeg", after: "headlight-after-4.jpeg" },
+      { before: "headlight-before-5.jpeg", after: "headlight-after-5.jpeg" },
+      { before: "headlight-before-6.jpeg", after: "headlight-after-6.jpeg" },
     ],
   },
   {
@@ -101,7 +101,7 @@ const SERVICES = [
       "Caliper cleaning and refinishing",
     ],
     gallery: [
-      { before: "wheels-before.jpeg", after: "/wheels-after.jpeg" },
+      { before: "wheels-before.jpeg", after: "wheels-after.jpeg" },
       { before: "wheels-before-2.jpeg", after: "wheels-after-2.jpeg" },
       { before: "wheels-before-3.jpeg", after: "wheels-after-3.jpeg" },
       { before: "wheels-before-4.jpeg", after: "wheels-after-4.jpeg" },
@@ -133,17 +133,22 @@ const SERVICES = [
 
 const byId = (arr, id) => arr.find((s) => s.id === id) || null;
 
-function Arrow({ className, style, onClick, direction }) {
+// Slider arrows
+function Arrow({ onClick, direction }) {
   return (
     <button
       type="button"
       aria-label={direction === "next" ? "Next" : "Previous"}
       onClick={onClick}
-      className={`absolute top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/90 hover:bg-white shadow p-2 ${
+      className={`absolute top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/90 dark:bg-neutral-900/90 hover:bg-white dark:hover:bg-neutral-900 shadow p-2 ${
         direction === "next" ? "right-2" : "left-2"
       }`}
     >
-    
+      {direction === "next" ? (
+        <FiArrowRight className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+      ) : (
+        <FiArrowLeft className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+      )}
     </button>
   );
 }
@@ -153,6 +158,7 @@ export default function ServicesWithModal() {
   const active = useMemo(() => byId(SERVICES, activeId), [activeId]);
   const dialogRef = useRef(null);
 
+  // lock scroll when modal open
   useEffect(() => {
     if (!active) return;
     const prev = document.body.style.overflow;
@@ -162,6 +168,7 @@ export default function ServicesWithModal() {
     };
   }, [active]);
 
+  // close on ESC + focus dialog
   useEffect(() => {
     if (!active) return;
     const onKey = (e) => e.key === "Escape" && setActiveId(null);
@@ -185,31 +192,41 @@ export default function ServicesWithModal() {
   return (
     <section id="services" className="py-20">
       <div className="mx-auto max-w-7xl px-4">
+        {/* Heading */}
         <div className="mb-12 text-center">
-          <h2 className="mb-3 text-3xl font-bold md:text-4xl">Our Expert Services</h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-500">
+          <h2 className="mb-3 text-3xl font-bold md:text-4xl text-gray-900 dark:text-white">
+            Our Expert Services
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg text-gray-500 dark:text-gray-300">
             Click on any service to see amazing before and after transformations
           </p>
         </div>
 
+        {/* Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service) => {
             const Icon = service.icon;
-            const cardPreview = service.gallery?.[0]?.before || service.beforeImg || "/placeholder.svg?height=300&width=400";
+            const cardPreview =
+              service.gallery?.[0]?.before ||
+              service.beforeImg ||
+              "/placeholder.svg?height=300&width=400";
+
             return (
               <article
                 key={service.id}
                 onClick={() => setActiveId(service.id)}
-                className="group flex cursor-pointer flex-col gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group flex cursor-pointer flex-col gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-neutral-900 dark:border-neutral-800"
               >
                 <header className="flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
-                    {Icon ? <Icon className="text-black" /> : null}
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-neutral-800">
+                    {Icon ? <Icon className="text-black dark:text-white" /> : null}
                   </span>
-                  <h3 className="text-xl font-semibold dark:text-black">{service.title}</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    {service.title}
+                  </h3>
                 </header>
 
-                <p className="text-gray-500">{service.blurb}</p>
+                <p className="text-gray-500 dark:text-gray-300">{service.blurb}</p>
 
                 <div className="relative overflow-hidden rounded-lg">
                   <img
@@ -225,10 +242,9 @@ export default function ServicesWithModal() {
 
                 <button
                   type="button"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-100 dark:hover:bg-neutral-800"
                 >
                   View Before & After
-                 
                 </button>
               </article>
             );
@@ -246,26 +262,26 @@ export default function ServicesWithModal() {
             onClick={() => setActiveId(null)}
           />
 
-          {/* Dialog (no border; desktop side-by-side style) */}
+          {/* Dialog */}
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="service-title"
-            className="fixed left-1/2 top-1/2 z-50 w-full md:w-150 max-w-5xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white shadow-2xl"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white shadow-2xl dark:bg-neutral-950"
           >
             {/* Header */}
-            <div className="flex items-start justify-between gap-4 border-b px-6 py-5">
+            <div className="flex items-start justify-between gap-4 border-b px-6 py-5 border-gray-200 dark:border-neutral-800">
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gray-100">
-                  {active.icon ? (() => { const Icon = active.icon; return <Icon />; })() : null}
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gray-100 dark:bg-neutral-800">
+                  {active.icon ? (() => { const Icon = active.icon; return <Icon className="text-black dark:text-white" />; })() : null}
                 </span>
-                <h2 id="service-title" className="text-2xl font-semibold">
+                <h2 id="service-title" className="text-2xl font-semibold text-gray-900 dark:text-white">
                   {active.title}
                 </h2>
               </div>
               <button
                 onClick={() => setActiveId(null)}
-                className="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                className="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-neutral-900 dark:hover:text-white"
                 aria-label="Close"
               >
                 <FiX className="h-6 w-6" />
@@ -278,7 +294,7 @@ export default function ServicesWithModal() {
               tabIndex={-1}
               className="max-h-[80vh] overflow-y-auto px-6 py-6 focus:outline-none"
             >
-              <p className="text-lg text-gray-600">{active.blurb}</p>
+              <p className="text-lg text-gray-600 dark:text-gray-300">{active.blurb}</p>
 
               {/* Slider: EACH SLIDE shows BEFORE & AFTER side-by-side on desktop */}
               <div className="mt-6 relative">
@@ -291,8 +307,10 @@ export default function ServicesWithModal() {
                       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                         {/* BEFORE */}
                         <div>
-                          <h3 className="mb-2 text-base md:text-lg font-semibold text-red-600">Before</h3>
-                          <div className="rounded-2xl bg-white-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
+                          <h3 className="mb-2 text-base md:text-lg font-semibold text-red-600 dark:text-red-400">
+                            Before
+                          </h3>
+                          <div className="rounded-2xl bg-gray-100 dark:bg-neutral-800 h-[320px] md:h-[360px] flex items-center justify-center p-3">
                             <img
                               src={pair.before || "/placeholder.svg?height=300&width=400"}
                               alt={`${active.title} — before`}
@@ -301,10 +319,13 @@ export default function ServicesWithModal() {
                             />
                           </div>
                         </div>
+
                         {/* AFTER */}
                         <div>
-                          <h3 className="mb-2 text-base md:text-lg font-semibold text-green-600">After</h3>
-                          <div className="rounded-2xl bg-white-100 h-[320px] md:h-[360px] flex items-center justify-center p-3">
+                          <h3 className="mb-2 text-base md:text-lg font-semibold text-green-600 dark:text-green-400">
+                            After
+                          </h3>
+                          <div className="rounded-2xl bg-gray-100 dark:bg-neutral-800 h-[320px] md:h-[360px] flex items-center justify-center p-3">
                             <img
                               src={pair.after || "/placeholder.svg?height=300&width=400"}
                               alt={`${active.title} — after`}
@@ -320,20 +341,22 @@ export default function ServicesWithModal() {
               </div>
 
               {/* About */}
-              <div className="mt-6 rounded-lg bg-gray-100/70 p-6">
-                <h3 className="mb-3 text-lg font-semibold">About This Service</h3>
-                <p className="mb-4 text-gray-600">{active.about}</p>
+              <div className="mt-6 rounded-lg bg-gray-100/70 dark:bg-neutral-900 p-6">
+                <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
+                  About This Service
+                </h3>
+                <p className="mb-4 text-gray-600 dark:text-gray-300">{active.about}</p>
 
                 {!!active.steps?.length && (
                   <>
-                    <h4 className="mb-2 font-semibold">Our Process:</h4>
+                    <h4 className="mb-2 font-semibold text-gray-900 dark:text-white">Our Process:</h4>
                     <ul className="space-y-2">
                       {active.steps.map((step, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="mt-0.5 inline-flex min-w-6 justify-center rounded border px-2 text-xs font-medium">
+                          <span className="mt-0.5 inline-flex min-w-6 justify-center rounded border px-2 text-xs font-medium border-gray-300 dark:border-neutral-700 text-gray-700 dark:text-gray-200">
                             {i + 1}
                           </span>
-                          <span className="text-sm text-gray-600">{step}</span>
+                          <span className="text-sm text-gray-600 dark:text-gray-300">{step}</span>
                         </li>
                       ))}
                     </ul>
@@ -345,13 +368,13 @@ export default function ServicesWithModal() {
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#quote"
-                  className="flex-1 inline-flex items-center justify-center rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                  className="flex-1 inline-flex items-center justify-center rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:opacity-90 dark:bg-white dark:text-black"
                 >
                   Get Quote for This Service
                 </a>
                 <a
                   href="#contact"
-                  className="flex-1 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                  className="flex-1 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-100 dark:hover:bg-neutral-800"
                 >
                   Book Consultation
                 </a>

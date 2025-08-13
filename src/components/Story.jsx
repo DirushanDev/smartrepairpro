@@ -5,13 +5,13 @@ const CallToAction = ({
   telHref = "tel:5551234567",
 }) => {
   return (
-    <section className="w-full bg-[#171717] text-white">
+    <section className="w-full bg-gray-50 text-gray-900 dark:bg-[#171717] dark:text-white">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:py-20 text-center">
-        <h2 className="mb-3 text-3xl font-extrabold sm:text-4xl">
+        <h2 className="mb-3 text-3xl font-extrabold sm:text-4xl text-gray-900 dark:text-white">
           Ready to Restore Your Vehicle?
         </h2>
 
-        <p className="mx-auto mb-10 max-w-3xl text-base sm:text-xl text-white/80">
+        <p className="mx-auto mb-10 max-w-3xl text-base sm:text-xl text-gray-600 dark:text-white/80">
           Get a free quote today and see the SmartRepair Pro difference
         </p>
 
@@ -19,7 +19,9 @@ const CallToAction = ({
           {/* Filled button */}
           <a
             href="#quote"
-            className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-lg font-semibold text-black shadow-sm hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-xl px-6 py-3 text-lg font-semibold shadow-sm transition
+                       bg-black text-white hover:opacity-90
+                       dark:bg-white dark:text-black"
           >
             Get Free Quote
           </a>
@@ -27,7 +29,9 @@ const CallToAction = ({
           {/* Outlined button */}
           <a
             href={telHref}
-            className="inline-flex items-center justify-center rounded-xl border border-white/80 px-6 py-3 text-lg font-semibold text-white hover:bg-white hover:text-black transition"
+            className="inline-flex items-center justify-center rounded-xl px-6 py-3 text-lg font-semibold transition
+                       border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white
+                       dark:border-white/80 dark:text-white dark:hover:bg-white dark:hover:text-black"
           >
             Call Now: {phone}
           </a>
