@@ -1,57 +1,70 @@
-import React from "react";
-import { FiArrowRight } from "react-icons/fi";
+'use client'
 
-const HeroSection = () => {
+import React, { useState } from 'react'
+import { FaSearch } from 'react-icons/fa'
+
+const Navbar = () => {
+  const [activeMenu, setActiveMenu] = useState<string | null>(null)
+
+  const handleMouseEnter = (menu: string) => setActiveMenu(menu)
+  const handleMouseLeave = () => setActiveMenu(null)
+
   return (
-    <section className="
-      py-20
-      bg-gradient-to-b from-gray-100 to-white
-      dark:from-neutral-950 dark:to-neutral-900
-    ">
-      <div className="container mx-auto px-4 text-center">
-        {/* Heading */}
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black dark:text-white">
-          Professional Smart Repair Services
-        </h1>
+    <nav className="border-b border-gray-200">
+      <div className="max-w-screen-xl mx-auto flex justify-between items-center px-6 py-4">
+        {/* Logo */}
+        <div className="text-2xl font-semibold tracking-widest">
+          INTU<span className="inline-block relative top-[-0.35em] text-sm">•</span>ITIVE
+        </div>
 
-        {/* Subheading */}
-        <p className="text-lg md:text-xl text-gray-500 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Expert automotive repair solutions that restore your vehicle to perfect
-          condition. From scratches to dents, we make it look like it never happened.
-        </p>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-10 text-sm font-medium text-gray-900 relative">
+          {['Products & Services', 'Healthcare Professionals', 'Patients', 'About'].map((item) => (
+            <li
+              key={item}
+              className="relative pb-1 cursor-pointer"
+              onMouseEnter={() => handleMouseEnter(item)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div
+                className={`transition-colors ${
+                  activeMenu === item ? 'text-blue-600' : 'text-gray-900'
+                }`}
+              >
+                {item}
+              </div>
+              {/* Blue underline */}
+              <div
+                className={`absolute bottom-0 left-0 h-[2px] bg-blue-600 transition-all duration-200 ${
+                  activeMenu === item ? 'w-full' : 'w-0'
+                }`}
+              />
+            </li>
+          ))}
+        </ul>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {/* Primary CTA */}
-          <a
-            href="#services"
-            className="
-              inline-flex items-center justify-center gap-2 px-6 py-3
-              bg-black text-white hover:opacity-90
-              dark:bg-white dark:text-black dark:hover:opacity-90
-              font-semibold rounded-md transition
-            "
-          >
-            View Our Services
-            <FiArrowRight className="text-lg" />
-          </a>
-
-          {/* Secondary CTA */}
-          <a
-            href="#quote"
-            className="
-              inline-flex items-center justify-center gap-2 px-6 py-3
-              border border-gray-300 bg-white text-gray-700 hover:bg-gray-100
-              dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-100 dark:hover:bg-neutral-800
-              font-semibold rounded-md transition
-            "
-          >
-            Get Free Quote
-          </a>
+        {/* Search Icon */}
+        <div className="hidden md:block text-gray-400">
+          <FaSearch size={16} />
         </div>
       </div>
-    </section>
-  );
-};
 
-export default HeroSection;
+      {/* Submenu */}
+      {activeMenu === 'Healthcare Professionals' && (
+        <div className="bg-white border-t border-gray-200 py-4">
+          <div className="max-w-screen-xl mx-auto px-6 flex space-x-10 text-sm text-gray-500">
+            {['Surgeons', 'OR Staff', 'Hospital Executives', 'Referring Physicians', 'Academics'].map(
+              (subItem) => (
+                <div key={subItem} className="hover:text-gray-900 cursor-pointer">
+                  {subItem}
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      )}
+    </nav>
+  )
+}
+
+export default Navbar
